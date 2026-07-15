@@ -1,4 +1,4 @@
-# Data science at Camp Nou
+# Data Science at Camp Nou
 
 *December 2022*
 
