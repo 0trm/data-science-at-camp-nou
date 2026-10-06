@@ -2,12 +2,6 @@
 
 *December 2022*
 
-> **My role (added 2026).** I worked in FC Barcelona's ticketing team for five years. The predictive systems in this article that reached production:
->
-> - **Dynamic pricing engine:** I built and shipped it. Per-match, per-zone price recommendations with a human approval step, pushed to the live ticketing system. Validated with a segment-based A/B test: +6% revenue per match, +4% sell-through, 86% of proposals approved. Public rebuild on synthetic data: [dynamic-pricing](https://github.com/0trm/dynamic-pricing).
-> - **SmartBooking:** built with an external AI/ML agency. I brought the domain expertise and worked with the agency team on scoping, features, roadmap, production and maintenance (details below).
-> - **RecZones:** I built and shipped the budget model behind the recommended areas in checkout.
-
 One of our core activities at **FC Barcelona**'s Venue Business department is selling match day and season tickets to football matches at **Spotify Camp Nou**. We operate in a highly dynamic and complex space, with multiple economic, social and political constraints. As in every business, targets move, but overall our goal is optimizing for match day revenue and fan experience, always keeping a baseline attendance. Mission-wise, we strive to give fans an unforgettable **stadium experience** and players the best possible **match atmosphere**, while maximizing **ticketing revenue** per match.
 
 ![An aerial view of Spotify Camp Nou on a match day](images/an-aerial-view-of-spotify-camp-nou-on-a-match-day.webp)
