@@ -140,6 +140,8 @@ Business results: on average **10% more tickets sold per season**, plus a **40% 
 
 - Maximizing ticket sales through availability **forecasting** – possible to sell tickets in advance regardless of when members release them
 - Enabling **dynamic pricing** strategies due to a higher commercialization timespan
+
+> **Code companion:** [dynamic-pricing](https://github.com/0trm/dynamic-pricing) is a public re-implementation of a ticket-pricing engine of this kind, on synthetic data: a demand forecast per match and seating zone, a revenue-maximising price search, and a human approval step, with its evaluation reproducible from the repo.
 - Unlocking **cross & up-selling** and new sales channels (via APIs) by bridging native outdated systems
 
 ---
