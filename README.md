@@ -51,16 +51,6 @@ RecZones is a **data-driven feature** integrated into the online purchase proces
 ![UX prototype of recommended areas predicted by the model](images/ux-prototype-of-recommended-areas-predicted-by-the-model.webp)
 <p align="center" style="color: grey; font-size: 0.90em; margin-top: -18px;"><em>Fig. 3: UX prototype of recommended areas predicted by the model</em></p>
 
-At its core, it is a predictive model of budget at the individual user level:
-
-- The model estimates the economic potential of buyers using available signals and user's history.
-- The UX encourages the user to buy in the recommended areas in order to maximize revenue per visit
-
-Business outcomes:
-
-- Average Ticket Value increased **+1.5% per competition**
-- Baseline Conversion Rate maintained per match
-
 In this example, data analysts formulated the core questions and hypotheses to validate:
 
 - How does the UX impact conversion rates along the purchase funnel?
