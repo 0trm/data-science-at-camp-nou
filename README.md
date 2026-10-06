@@ -2,6 +2,12 @@
 
 *December 2022*
 
+> **My role (added 2026).** I worked in FC Barcelona's ticketing team for five years. The predictive systems in this article that reached production:
+>
+> - **Dynamic pricing engine:** I built and shipped it. Per-match, per-zone price recommendations with a human approval step, pushed to the live ticketing system. Validated with a segment-based A/B test: +6% revenue per match, +4% sell-through, 86% of proposals approved. Public rebuild on synthetic data: [dynamic-pricing](https://github.com/0trm/dynamic-pricing).
+> - **SmartBooking:** built with an external AI/ML agency. I brought the domain expertise and worked with the agency team on scoping, features, roadmap, production and maintenance (details below).
+> - **RecZones:** I built and shipped the budget model behind the recommended areas in checkout.
+
 One of our core activities at **FC Barcelona**'s Venue Business department is selling match day and season tickets to football matches at **Spotify Camp Nou**. We operate in a highly dynamic and complex space, with multiple economic, social and political constraints. As in every business, targets move, but overall our goal is optimizing for match day revenue and fan experience, always keeping a baseline attendance. Mission-wise, we strive to give fans an unforgettable **stadium experience** and players the best possible **match atmosphere**, while maximizing **ticketing revenue** per match.
 
 ![An aerial view of Spotify Camp Nou on a match day](images/an-aerial-view-of-spotify-camp-nou-on-a-match-day.webp)
@@ -136,13 +142,27 @@ With SmartBooking, users do not select seats but an **area of the stadium** inst
 
 At its core, a **prediction model** for "tickets available to sell" was built based on *Seient Lliure* predictions for each area of the stadium across different time horizons (72, 48, 24, and 0 hours before the match), using features that characterize: match (day, competition, date and time), rival (historical and current ELO score, record, special rivalry, etc.), stadium areas, holidays, and more.
 
+<details>
+<summary>Model details</summary>
+
+| Aspect | Description |
+| :--- | :--- |
+| **Target** | Seats available to sell per stadium area, i.e. member seats released through *Seient Lliure* |
+| **Horizons** | 72, 48, 24 and 0 hours before kick-off |
+| **Approach** | Supervised regression, one prediction per area and horizon |
+| **Features** | Match (day, competition, days to match, league winner already known), rival (league position, ELO/FIFA ranking, derby or *Clásico*), Barça form and injuries, historical sales, releases and prices, member and zone profiles, web navigation, weather, holidays, external events |
+| **Evaluation** | 85% accuracy, against 65% for domain experts' estimates, 45% for historical averages and 15% for a random guess |
+| **Team** | Built with an external AI/ML agency; I brought the domain expertise and worked with the agency team on scoping, features, roadmap, production and maintenance |
+
+</details>
+
 Business results: on average **10% more tickets sold per season**, plus a **40% increase in average ticket value**, as a consequence of:
 
 - Maximizing ticket sales through availability **forecasting** – possible to sell tickets in advance regardless of when members release them
 - Enabling **dynamic pricing** strategies due to a higher commercialization timespan
+- Unlocking **cross & up-selling** and new sales channels (via APIs) by bridging native outdated systems
 
 > **Code companion:** [dynamic-pricing](https://github.com/0trm/dynamic-pricing) is a public re-implementation of a ticket-pricing engine of this kind, on synthetic data: a demand forecast per match and seating zone, a revenue-maximising price search, and a human approval step, with its evaluation reproducible from the repo.
-- Unlocking **cross & up-selling** and new sales channels (via APIs) by bridging native outdated systems
 
 ---
 
