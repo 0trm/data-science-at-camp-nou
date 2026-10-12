@@ -7,9 +7,9 @@ One of our core activities at **FC Barcelona**'s Venue Business department is se
 ![An aerial view of Spotify Camp Nou on a match day](images/an-aerial-view-of-spotify-camp-nou-on-a-match-day.webp)
 <p align="center" style="color: grey; font-size: 0.90em; margin-top: -18px;"><em>Fig. 1: An aerial view of Spotify Camp Nou on a match day</em></p>
 
-Working at FC Barcelona is exciting because it's one of the largest brands in football, with both strong values and a worldwide recognized playing style that go [beyond the pitch](https://www.youtube.com/watch?v=yyqnd1uNvI0). Specifically, working at Ticketing is great since the data available is rich and the data culture is continually growing. Analytical thinking is emphasized from the top-down, and the spirit is relying less on intuition and trying to support decisions with data and statistics.
+Working at FC Barcelona is exciting because it's one of the largest brands in football, with both strong values and a worldwide recognized playing style that go [beyond the pitch](https://www.youtube.com/watch?v=yyqnd1uNvI0). Specifically, working at Ticketing is great since the data available is rich and the data culture is continually growing. Analytical thinking is emphasized from the top down, and the spirit is relying less on intuition and trying to support decisions with data and statistics.
 
-The motivation for this article is sharing from my perspective how we approach **data science & analytics** challenges at Ticketing, how the team is organized, the way we prioritize our tasks, and what it means for us to succeed – conceptually but also illustrating with real-world examples of fan-faced problems we have tackled. After sharing my thoughts – as a form of reflection of my last 5 years at the company – I will close by mentioning some projects that excite us about the future.
+The motivation for this article is sharing from my perspective how we approach **data science & analytics** challenges at Ticketing, how the team is organized, the way we prioritize our tasks, and what it means for us to succeed – conceptually but also illustrating with real-world examples of fan-facing problems we have tackled. After sharing my thoughts – as a form of reflection of my last 5 years at the company – I will close by mentioning some projects that excite us about the future.
 
 ---
 
@@ -30,7 +30,7 @@ We mainly output three things as a team:
 
 1. Analytics
 2. Experimentation
-3. Predictive Modeling
+3. Predictive modeling
 
 In the next sections, I will dive into and try to illustrate each output with examples. Key to these success stories is our partnership with **local agencies** who understand our business deeply, know the subtleties of the market we operate in, and most importantly have the knowledge to act in it.
 
@@ -146,7 +146,7 @@ Business results: on average **10% more tickets sold per season**, plus a **40% 
 - Enabling **dynamic pricing** strategies due to a higher commercialization timespan
 - Unlocking **cross & up-selling** and new sales channels (via APIs) by bridging native outdated systems
 
-> **Code companion:** [dynamic-pricing](https://github.com/0trm/dynamic-pricing) is a public re-implementation of a ticket-pricing engine of this kind, on synthetic data: a demand forecast per match and seating zone, a revenue-maximising price search, and a human approval step, with its evaluation reproducible from the repo.
+> **Code companion:** [dynamic-pricing](https://github.com/0trm/dynamic-pricing) is a public re-implementation of a ticket-pricing engine of this kind, on synthetic data: a demand forecast per match and seating zone, a revenue-maximizing price search, and a human approval step, with its evaluation reproducible from the repo.
 
 ---
 
