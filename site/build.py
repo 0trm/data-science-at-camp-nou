@@ -23,13 +23,13 @@ def slug(text):
 md = MarkdownIt("commonmark").enable("table")
 tokens = md.parse((ROOT / "README.md").read_text())
 
-heads = []  # (level, text, id) for every h2 and h3
+heads = []  # (text, id) for every h2; the h3s are the practical examples, which stay out of the contents
 for i, token in enumerate(tokens):
     if token.type == "heading_open":
         text = "".join(c.content for c in tokens[i + 1].children if c.type in ("text", "code_inline"))
         token.attrSet("id", slug(text))
-        if token.tag in ("h2", "h3"):
-            heads.append((int(token.tag[1]), text, slug(text)))
+        if token.tag == "h2":
+            heads.append((text, slug(text)))
 
 # %%
 content = md.renderer.render(tokens, md.options, {})
@@ -44,7 +44,7 @@ content = re.sub(r"<hr />\n(?=<h2)", "", content)
 # Links off the page open in a new tab; the page's own #anchors stay in it
 content = content.replace('<a href="http', '<a target="_blank" rel="noopener" href="http')
 
-toc = "\n".join(f'      <li class="l{level}"><a href="#{hid}">{text}</a></li>' for level, text, hid in heads)
+toc = "\n".join(f'      <li class="l2"><a href="#{hid}">{text}</a></li>' for text, hid in heads)
 
 # %%
 OUT.mkdir(exist_ok=True)
@@ -53,4 +53,4 @@ page = (SITE / "template.html").read_text().replace("{{toc}}", toc).replace("{{c
 for name in ASSETS:
     shutil.copy(SITE / name, OUT / name)
 shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
-print(f"_site/index.html: {len(heads)} headings, {content.count('<figure>')} figures")
+print(f"_site/index.html: {len(heads)} sections, {content.count('<figure>')} figures")

@@ -98,7 +98,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .toc li a { display: block; padding: 3px 6px; color: var(--text); text-decoration: none; border-left: 2px solid transparent; }
 .toc li a:hover { text-decoration: underline; }
 .toc li.l2 a { font-weight: bold; margin-top: 8px; background: var(--bar); }
-.toc li.l3 a { color: var(--muted); }
 .toc li a.on { color: var(--text); border-left-color: var(--link); background: var(--code); }
 
 main { max-width: 44em; }
@@ -129,8 +128,10 @@ td:first-child { white-space: nowrap; }
 /* The one rule left from the README: it sets the disclaimer apart from the essay */
 main hr { border: 0; border-top: 1px solid var(--rule); margin: 32px 0 10px; }
 main hr + p { font-size: 12px; color: var(--muted); }
-footer { font-size: 11px; color: var(--muted); margin-top: 16px; }
+/* The 0trm.dev homepage's footer */
+footer { font-size: 11px; color: var(--muted); margin-top: 28px; }
 footer p { margin: 0; }
+footer p + p { margin-top: 4px; }
 
 @media (min-width: 1024px) {
   .layout { display: grid; grid-template-columns: 290px minmax(0, 44em); column-gap: 56px; }
@@ -165,7 +166,7 @@ footer p { margin: 0; }
 <main>
 {{content}}
 </main>
-<footer><p>Tomás Ravalli · <a target="_blank" rel="noopener" href="https://github.com/0trm/data-science-at-camp-nou">source</a></p></footer>
+<footer><p>If you are an agent, read <a target="_blank" rel="noopener" href="/llms.txt">/llms.txt</a></p><p>© 2026 0trm</p></footer>
 </div>
 </div>
 <script>
@@ -191,7 +192,7 @@ footer p { margin: 0; }
   // Mark the last heading above the top fifth of the screen, and keep it visible in the contents
   var links = {};
   toc.querySelectorAll('a[href^="#"]').forEach(function (a) { links[a.getAttribute("href").slice(1)] = a; });
-  var heads = Array.prototype.filter.call(document.querySelectorAll("main h2[id], main h3[id]"), function (h) { return links[h.id]; });
+  var heads = Array.prototype.filter.call(document.querySelectorAll("main h2[id]"), function (h) { return links[h.id]; });
   var marked = null, queued = false;
   function mark() {
     queued = false;
