@@ -8,6 +8,8 @@ import shutil
 
 from markdown_it import MarkdownIt
 
+import chart
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 OUT = ROOT / "_site"
@@ -39,6 +41,17 @@ content = re.sub(
     r"<figure>\1<figcaption>\2</figcaption></figure>",
     content,
 )
+# Fig. 6 is an Excel screenshot in the README; here it is redrawn in the page's colours
+content = re.sub(
+    r'<img src="images/a-simplified-graph-explaining-the-problem-smartbooking-solves.webp"[^>]*>',
+    lambda m: chart.fig6(),
+    content,
+)
+# The README folds the model details for GitHub; here the table stays open, titled by its summary
+content = re.sub(r"<details>\n<summary>(.*?)</summary>\n<table>", r"<table>\n<caption>\1</caption>", content)
+content = content.replace("</table>\n</details>", "</table>")
+# The code companion note is for readers on GitHub; the page leaves it out
+content = re.sub(r"<blockquote>\n<p><strong>Code companion:</strong>.*?</blockquote>\n", "", content, flags=re.S)
 # Every h2 has its own rule, so the README's --- between sections would draw a second one
 content = re.sub(r"<hr />\n(?=<h2)", "", content)
 # Links off the page open in a new tab; the page's own #anchors stay in it
@@ -53,4 +66,5 @@ page = (SITE / "template.html").read_text().replace("{{toc}}", toc).replace("{{c
 for name in ASSETS:
     shutil.copy(SITE / name, OUT / name)
 shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
-print(f"_site/index.html: {len(heads)} sections, {content.count('<figure>')} figures")
+charts = content.count('<div class="chart">')
+print(f"_site/index.html: {len(heads)} sections, {content.count('<figure>')} figures, {charts} redrawn")

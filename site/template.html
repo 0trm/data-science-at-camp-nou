@@ -36,6 +36,10 @@
   --rule: #c4c4bc;
   --code: #f3f3ee;
   --photo: none;
+  /* Fig. 6's lines, checked for colour-blind separation and contrast on this background */
+  --sold: #2a78d6;
+  --released: #c27a00;
+  --model: #c2338f;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -49,6 +53,9 @@
     --rule: #3e4451;
     --code: #21252b;
     --photo: brightness(.85);
+    --sold: #4d93dc;
+    --released: #b37b1c;
+    --model: #d4609f;
     color-scheme: dark;
   }
 }
@@ -62,6 +69,9 @@
   --rule: #3e4451;
   --code: #21252b;
   --photo: brightness(.85);
+  --sold: #4d93dc;
+  --released: #b37b1c;
+  --model: #d4609f;
   color-scheme: dark;
 }
 
@@ -113,14 +123,37 @@ figure { margin: 16px 0 20px; }
 figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; filter: var(--photo); }
 figcaption { font-size: 12px; color: var(--muted); text-align: center; margin-top: 6px; }
 
+/* Fig. 6, redrawn: the lines stretch with the column, the text keeps its size */
+.chart { font-size: 11px; line-height: 1; color: var(--muted); }
+.chart .title { margin: 0 0 14px; font-size: 12px; font-weight: bold; color: var(--text); }
+.plot { position: relative; height: 230px; margin: 0 8px 0 30px; }
+.plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.plot line, .plot polyline { vector-effect: non-scaling-stroke; }
+.plot .grid { stroke: var(--rule); stroke-width: 1; }
+.plot .base { stroke: var(--muted); stroke-width: 1; }
+.plot polyline { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.plot polyline.sold { stroke: var(--sold); }
+.plot polyline.released { stroke: var(--released); }
+.plot polyline.model { stroke: var(--model); stroke-dasharray: 6 4; stroke-linecap: butt; }
+.plot .y, .plot .x, .plot .lab { position: absolute; white-space: nowrap; }
+.plot .y { right: 100%; margin-right: 6px; transform: translateY(-50%); }
+.plot .x { top: 100%; margin-top: 6px; transform: translateX(-50%); }
+.plot .lab { color: var(--text); }
+.plot .lab.above { transform: translateY(-100%); margin-top: -4px; }
+.plot .lab.below { margin-top: 4px; }
+/* Each name carries a short piece of its line, so no name depends on colour alone */
+.plot .lab::before { content: ""; display: inline-block; width: 14px; margin-right: 5px; vertical-align: middle; border-top: 2px solid; }
+.plot .lab.sold::before { border-color: var(--sold); }
+.plot .lab.released::before { border-color: var(--released); }
+.plot .lab.model::before { border-top-style: dashed; border-color: var(--model); }
+.chart .xtitle { margin: 24px 8px 0 30px; text-align: center; }
+
 blockquote { margin: 12px 0 14px; padding: 4px 12px; border-left: 3px solid var(--rule); background: var(--code); }
 blockquote p { margin: 0; }
 
-/* Model details: folded, and a plain ruled table once open */
-main details { margin: 12px 0 14px; border: 1px solid var(--rule); padding: 6px 10px; }
-main details[open] { padding-bottom: 10px; }
-main summary { cursor: pointer; font-weight: bold; }
-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; line-height: 1.45; }
+/* Model details: a plain ruled table, titled by its caption */
+table { width: 100%; border-collapse: collapse; margin: 14px 0 16px; font-size: 13px; line-height: 1.45; }
+caption { text-align: left; font-weight: bold; padding-bottom: 4px; }
 th, td { padding: 4px 6px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
 thead th { border-bottom-color: var(--text); }
 td:first-child { white-space: nowrap; }
