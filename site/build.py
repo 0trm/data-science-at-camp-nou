@@ -47,6 +47,20 @@ content = re.sub(
     lambda m: chart.fig6(),
     content,
 )
+# Each image carries its size, so the text does not jump when it arrives; all but the first wait until scrolled near
+SIZES = {
+    "an-aerial-view-of-spotify-camp-nou-on-a-match-day.webp": (1200, 415),
+    "match-day-at-spotify-camp-nou-from-field-perspective-photo-by-michael-lee.webp": (1200, 601),
+    "ux-prototype-of-recommended-areas-predicted-by-the-model.webp": (1200, 715),
+    "ticketing-landing-page-for-a-home-match-against-valencia.webp": (1200, 998),
+    "a-screenshot-of-the-seient-lliure-app-as-featured-on-the-app-store.webp": (307, 640),
+}
+content = re.sub(
+    r'<img src="images/([^"]+)"',
+    lambda m: '<img src="images/%s" width="%d" height="%d"%s'
+    % (m.group(1), *SIZES[m.group(1)], "" if m.group(1).startswith("an-aerial") else ' loading="lazy" decoding="async"'),
+    content,
+)
 # The README folds the model details for GitHub; here the table stays open, titled by its summary
 content = re.sub(r"<details>\n<summary>(.*?)</summary>\n<table>", r"<table>\n<caption>\1</caption>", content)
 content = content.replace("</table>\n</details>", "</table>")
