@@ -1,6 +1,6 @@
 # Data Science at Camp Nou
 
-*December 2022*
+*Tomás Ravalli · December 2022 · model details added October 2026*
 
 One of our core activities at **FC Barcelona**'s Venue Business department is selling match day and season tickets to football matches at **Spotify Camp Nou**. We operate in a highly dynamic and complex space, with multiple economic, social and political constraints. As in every business, targets move, but overall our goal is optimizing for match day revenue and fan experience, always keeping a baseline attendance. Mission-wise, we strive to give fans an unforgettable **stadium experience** and players the best possible **match atmosphere**, while maximizing **ticketing revenue** per match.
 

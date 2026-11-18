@@ -13,6 +13,11 @@
 <meta property="og:url" content="https://0trm.dev/data-science-at-camp-nou/">
 <meta property="og:title" content="Data Science at Camp Nou">
 <meta property="og:description" content="How a small data team works on ticketing for FC Barcelona at Spotify Camp Nou: analytics, experimentation and predictive modelling, each with a real example.">
+<meta property="og:image" content="https://0trm.dev/img/flow-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Short dashes laid along a flowing field">
+<meta name="twitter:card" content="summary_large_image">
 <!-- The 0trm.dev icons, so the page looks like the rest of the site in a tab -->
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -27,14 +32,14 @@
 </script>
 <style>
 :root {
-  --bg: #fcfcfa;
-  --text: #1a1a1a;
-  --muted: #5a5a5a;
-  --link: #0645ad;
-  --visited: #5a3696;
-  --bar: #ebebe5;
-  --rule: #c4c4bc;
-  --code: #f3f3ee;
+  --bg: #fafafa;
+  --text: #383a42;
+  --muted: #696c77;
+  --link: #155aef;
+  --visited: #a626a4;
+  --bar: #f0f0f0;
+  --rule: #d6d6d7;
+  --code: #f2f2f2;
   --photo: none;
   /* Fig. 6's lines, checked for colour-blind separation and contrast on this background */
   --sold: #2a78d6;
@@ -84,7 +89,9 @@ body {
   font: 14px/1.6 Verdana, Geneva, Tahoma, sans-serif;
   overflow-wrap: break-word;
 }
-a { color: var(--link); }
+/* Underlines 1px thick, a little below the text, in 40% of the link's color, full on hover */
+a { color: var(--link); text-underline-offset: .2em; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, currentColor 40%, transparent); }
+a:hover { text-decoration-color: currentColor; }
 a:visited { color: var(--visited); }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--link); outline-offset: 1px; }
 
@@ -95,7 +102,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 /* Theme: one button showing the theme a click switches to */
 .toggle button { width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; padding: 0; background: none; border: 0; color: var(--muted); cursor: pointer; }
 .toggle button:hover { color: var(--text); }
-.toggle svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .toggle .to-light { display: none; }
 :root[data-theme="dark"] .toggle .to-dark { display: none; }
 :root[data-theme="dark"] .toggle .to-light { display: inline-flex; }
@@ -105,7 +112,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 }
 .toc summary { cursor: pointer; font-size: 12px; color: var(--muted); padding: 6px 0 0; }
 .toc ol { list-style: none; margin: 6px 0 0; padding: 0; font-size: 12px; line-height: 1.35; }
-.toc li a { display: block; padding: 3px 6px; color: var(--text); text-decoration: none; border-left: 2px solid transparent; }
+.toc li a { display: block; padding: 4px 6px; color: var(--text); text-decoration: none; border-left: 2px solid transparent; }
+.toc li a:focus-visible { outline-offset: -2px; }
 .toc li a:hover { text-decoration: underline; }
 .toc li.l2 a { font-weight: bold; margin-top: 8px; background: var(--bar); }
 .toc li a.on { color: var(--text); border-left-color: var(--link); background: var(--code); }
@@ -121,6 +129,8 @@ li { margin: 0 0 4px; }
 /* Figures: centred, a little dimmer in the dark theme, with the caption under them */
 figure { margin: 16px 0 20px; }
 figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; filter: var(--photo); }
+/* Fig. 5 is a 307px phone screenshot: keep it near its own size, not doubled */
+figure img[src*="seient-lliure"] { max-width: 230px; }
 figcaption { font-size: 12px; color: var(--muted); text-align: center; margin-top: 6px; }
 
 /* Fig. 6, redrawn: the lines stretch with the column, the text keeps its size */
@@ -175,6 +185,7 @@ footer p + p { margin-top: 4px; }
   .layout { padding: 4px 16px 24px; }
   .toc { margin-bottom: 8px; }
   table { font-size: 12px; }
+  main ul, main ol { padding-left: 24px; }
 }
 </style>
 </head>
@@ -182,7 +193,7 @@ footer p + p { margin-top: 4px; }
 <div class="layout">
 <nav class="toc" aria-label="Contents">
   <div class="navtop">
-    <a target="_blank" rel="noopener" href="https://0trm.dev/">0trm.dev</a>
+    <a href="https://0trm.dev/">0trm.dev</a>
     <span class="toggle">
       <button type="button" class="to-dark" aria-label="Switch to dark theme"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.8 6.8 0 0 1 7.4 4a6.8 6.8 0 1 0 8.6 8.6z"/></svg></button>
       <button type="button" class="to-light" aria-label="Switch to light theme"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.5v2.5M10 16v2.5M1.5 10H4M16 10h2.5M4 4l1.8 1.8M14.2 14.2 16 16M4 16l1.8-1.8M14.2 5.8 16 4"/></svg></button>
@@ -199,7 +210,7 @@ footer p + p { margin-top: 4px; }
 <main>
 {{content}}
 </main>
-<footer><p>If you are an agent, read <a target="_blank" rel="noopener" href="/llms.txt">/llms.txt</a></p><p>© 2026 0trm</p></footer>
+<footer><p>If you are an agent, read <a target="_blank" rel="noopener" href="/llms.txt">/llms.txt</a></p><p>© 2026 0trm · <a href="#top">top</a></p></footer>
 </div>
 </div>
 <script>
@@ -229,7 +240,7 @@ footer p + p { margin-top: 4px; }
   var marked = null, queued = false;
   function mark() {
     queued = false;
-    var line = innerHeight / 5, current = null;
+    var left = document.documentElement.scrollHeight - innerHeight - scrollY, line = innerHeight / 5 + Math.max(0, innerHeight * .8 - left), current = null;
     heads.forEach(function (h) { if (h.getBoundingClientRect().top <= line) current = h; });
     var a = current && links[current.id];
     if (a === marked) return;
